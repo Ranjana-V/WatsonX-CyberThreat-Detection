@@ -5,7 +5,18 @@
 Follow these steps to get the project up and running:
 
 ---
+## ⚙️ Setup Environment Variables
 
+Create a `.env` file in the root directory and fill in the following details:
+
+```env
+# .env.example
+WATSONX_API_KEY=your_api_key_here
+WATSONX_PROJECT_ID=your_project_id_here
+WATSONX_URL=your_watsonx_url_here
+```
+
+---
 ## ✅ Create Virtual Environment
 
 ```bash
